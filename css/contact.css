@@ -1,0 +1,38 @@
+.container{
+	box-sizing: border-box;
+  }
+  
+  /* Style the container/contact section */
+  .container {
+	border-radius: 1px;
+	
+	padding: 50px;
+  }
+  .title {
+	color: #333333;
+	font-size: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 1;
+	margin: 0;
+  }
+  
+  .information {
+	display: flex;
+	color: #555;
+	margin: 0.7rem 0;
+	align-items: center;
+	font-size: 0.95rem;
+	
+  }
+  
+  .icon {
+	width: 28px;
+	margin-right: 0.7rem;
+	padding-right: 2%;
+  }
+  
+  
+.text {
+	  margin: 1rem 0 1.5rem 0;
+}

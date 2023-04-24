@@ -1,0 +1,56 @@
+.achievements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 80px;
+    background-color: #e7e2e2;
+    margin: 0;
+  }
+  
+  .achievements .work {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+  
+  .achievements .work i {
+    width: fit-content;
+    font-size: 50px;
+    color: #333333;
+    border-radius: 50%;
+    border: 2px solid #333333;
+    padding: 12px;
+  }
+  
+  .achievements .work .work-heading {
+    font-size: 30px;
+    color: #333333;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  
+  .achievements .work .work-text {
+    font-size: 15px;
+    color: #454545;
+    margin: 10px 0;
+    text-align: justify;
+  }
+  .about-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 80px;
+    border-top: 2px solid #606060;
+    background-color: #44a09e;
+  }
+  
+  .about-me-text h2 {
+    font-size: 30px;
+    color: #333333;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+
+  }

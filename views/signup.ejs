@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style-signup.css">
+  <title>Account</title>
+</head>
+
+<body>
+
+  <div id="container" class="container">
+    <!-- FORM SECTION -->
+    <div class="row">
+      <!-- SIGN UP -->
+        <div class="col align-items-center flex-col sign-up">
+          <div class="form-wrapper align-items-center">
+             <form action="/signup" method="post" class="form sign-up">
+            <div class="form sign-up">
+              <div class="input-group">
+                <i class='bx bxs-user'></i>
+                <input type="text" name="name" placeholder="name">
+              </div>
+              <div class="input-group">
+                <i class='bx bx-mail-send'></i>
+                <input type="email" name="email" placeholder="Email">
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="text" name="number" placeholder="mobile">
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" name="password" placeholder="Password">
+              </div>
+              <button type="submit">Sign up</button>
+              <p>
+                <span>
+                  Already have an account?
+                </span>
+                <b onclick="toggle()" class="pointer">
+                  Sign in here
+                </b>
+              </p>
+            </form>
+
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+      <!-- END SIGN UP -->
+      <!-- SIGN IN -->
+      <div class="col align-items-center flex-col sign-in">
+        <div class="form-wrapper align-items-center">
+          <div class="form sign-in">
+            <form class="" action="/signin" method="post">
+            <div class="input-group">
+              <i class='bx bxs-user'></i>
+              <input type="text" name="email1" placeholder="email">
+            </div>
+            <div class="input-group">
+              <i class='bx bxs-lock-alt'></i>
+              <input type="password" name="password1" placeholder="Password">
+            </div>
+            <button type="submit">
+              Sign in
+            </button>
+            <p>
+            </p>
+            <p>
+              <span>
+                Don't have an account?
+              </span>
+              <b onclick="toggle()" class="pointer">
+                Sign up here
+              </b>
+            </p>
+          </form>
+
+
+          </div>
+        </div>
+        <div class="form-wrapper">
+
+        </div>
+      </div>
+
+      <!-- END SIGN IN -->
+    </div>
+    <!-- END FORM SECTION -->
+    <!-- CONTENT SECTION -->
+    <div class="row content-row">
+      <!-- SIGN IN CONTENT -->
+      <div class="col align-items-center flex-col">
+        <div class="text sign-in">
+          <h2 class="welcome">
+            Welcome
+          </h2>
+
+        </div>
+        <div class="img sign-in">
+
+        </div>
+      </div>
+      <!-- END SIGN IN CONTENT -->
+      <!-- SIGN UP CONTENT -->
+      <div class="col align-items-center flex-col">
+        <div class="img sign-up">
+
+        </div>
+        <div class="text sign-up">
+          <h2>
+            Join with us
+          </h2>
+
+        </div>
+      </div>
+      <!-- END SIGN UP CONTENT -->
+    </div>
+    <!-- END CONTENT SECTION -->
+  </div>
+
+  <script>
+    let container = document.getElementById('container')
+
+    toggle = () => {
+      container.classList.toggle('sign-in')
+      container.classList.toggle('sign-up')
+    }
+
+    setTimeout(() => {
+      container.classList.add('sign-in')
+    }, 200)
+  </script>
+  <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"2440b4080e2bcdf9e78432e54a0d09352","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+<footer>
+  <p>&copy; 2023 Healthcare Website. All Rights Reserved.</p>
+</footer>
+</body>
+
+</html>
