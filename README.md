@@ -65,11 +65,19 @@ With the help of Dialog Flow, a like-life conversational AI to the websites, app
 
 ![unnamed](https://user-images.githubusercontent.com/78655015/233976306-1c07ac3b-41e8-4381-8595-4a5e3586bfc9.png)
 
+<div align="center">
+
 Fig.1 Interfacing NodeMCU with MAX30100 & LM35 (Heart Rate/Pulse rate Sensor & Temperature Sensor)
+
+</div>
 
 ![LM35](https://user-images.githubusercontent.com/78655015/233972818-71405e7f-4745-4f61-860c-3af845e3160a.png)
 
+<div align="center">
+
 Fig.2 Methodology Chart
+
+</div>
 
 ## CARE-AI WEBSITE!
 
