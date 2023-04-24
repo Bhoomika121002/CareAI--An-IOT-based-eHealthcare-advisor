@@ -23,7 +23,7 @@ float maxBPM = 0;
 
 //Put your SSID & Password
 const char* ssid = "motorola one fusion+ 4318";  // Enter SSID here
-const char* password = "mani@152002";  //Enter Password here
+const char* password = "";  //Enter Password here
 
 PulseOximeter pox;
 uint32_t tsLastReport = 0;
