@@ -30,17 +30,26 @@ Traditional healthcare systems have been time-consuming and difficult to navigat
 
 ## METHODOLOGY
 The Healthcare system in India suffers from three primary deficiencies: supply, utilisation, and equipment. A key component of IoT in healthcare is the Healthcare kit. It makes record transmission and communication easier. 
+
 To use the kit, the patient first needs to register themselves to the system. 
+
 After registration, the patient can then wear the connected sensors to get their health parameters monitored. 
-	The sensors used are
+
+The sensors used are
 o   Max30100
 o   LM35 
 -> Now to access the website, the user must log in to the website.
+
 -> The user will then receive authentication from MongoDB cloud to get authorization for the website.
+
 -> With the use of a health kit, the three basic parameters i.e. oxygen level, body temperature and pulse rate are measured.
+
 -> This data from the health sensory kit is displayed on the Arduino’s screen through the I2C(Inter-Integrated Circuit) protocol.
+
 -> The data is then fetched from here and sent to the web server through the use of HTTP(Hypertext Transfer Protocol) for the secure transfer of data.
+
 -> From here, if the average heartbeat is greater than 85 BPM, then the user will receive an alert mail with the heart rate value through the SMTP(Simple Mail Transfer Protocol).
+
 -> Furthermore, the website will include health blogs and a chatbot that will provide a self-assessment of mild symptoms. 
 
 •  IOT BASED HEALTHCARE KIT
@@ -67,7 +76,10 @@ Our technology collects real-time medical information about a patient and stores
 
 ## REFERENCES
 [1] S. Bhutada, A. Singh, K. Upadhyaya and P. Gaikar, "Ru-Urb IoT-AI powered Healthcare Kit," 2021 5th International Conference on Intelligent Computing and Control Systems (ICICCS), Madurai, India, 2021, pp. 417-422, doi: 10.1109/ICICCS51141.2021.9432257.
+
 [2] Katariya, Vivek & Vitthal, Shinde & Gutte, & Devare, Manoj. (2019). IntelligentHealthbotforTransformingHealthcare.
+
 [3] P. Gupta, D. Agrawal, J. Chhabra and P. K. Dhir, "IoT-based smart healthcare kit," 2016 International Conference on Computational Techniques in Information and Communication Technologies (ICCTICT), New Delhi, India, 2016, pp. 237-242, doi: 10.1109/ICCTICT.2016.7514585.
+
 [4] M. U. Ahmed, M. Björkman, A. Čaušević H. Fotouhi, and M. Lindén, “An overview on the internet of things for Health Monitoring Systems,” SpringerLink, 01-Jan-1970. Available: https://link.springer.com/chapter/10.1007/978-3-319-47063-4_44.
 
