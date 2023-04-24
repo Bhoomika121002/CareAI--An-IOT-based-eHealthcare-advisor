@@ -2,8 +2,11 @@
 
 ## INTRODUCTION
 • The medical services industry assumes a fundamental part not just in the individuals yet additionally in the economy all in all. While the medical services area is continually improving, a country like India with its developing populace generally falls short of sufficient offices.
+
 • India has a general medical care model that is generally directed at the state level rather than the government level, with each state having its own openly financed medical services. 
-• Significant clinical experts are in metropolitan regions which simply cover a few pieces of India. The need for openness to country regions builds the dangers and decreases personal satisfaction. What's more, the expense of clinical treatment is high. 
+
+• Significant clinical experts are in metropolitan regions which simply cover a few pieces of India. The need for openness to country regions builds the dangers and decreases personal satisfaction. What's more, the expense of clinical treatment is high.
+
 • Ordinary body tests, forward and backward clinics, and pre-and-post-hospitalization clinical costs all amount to a powerful sum that individuals can't bear. To change this multitude of negative marks, the full advantage of altering IoT in medical care is thought of. 
 
 ## PROBLEM STATEMENT
@@ -57,6 +60,13 @@ Our healthcare website is proud to incorporate cutting-edge technology that help
 
 •  HEALTH BOT
 With the help of Dialog Flow, a like-life conversational AI to the websites, applications, messaging platforms, and contact centre with an intuitive, advanced virtual agent, this project helps the users interact with the website much more easily. The chatbot uses intents and entities for implementing a smooth conversation and then leading to a final diagnosis by an effective text-based diagnostic technique.
+
+![unnamed](https://user-images.githubusercontent.com/78655015/233972692-92ed1f93-094f-434d-a723-ed0fbdbdc292.png)
+Fig.1 Interfacing NodeMCU with MAX30100 & LM35 (Heart Rate/Pulse rate Sensor & Temperature Sensor)
+
+![LM35](https://user-images.githubusercontent.com/78655015/233972818-71405e7f-4745-4f61-860c-3af845e3160a.png)
+Fig.2 Methodology Chart
+
 
 ## APPLICATION
 • The chatbot will act as a symptom checker asking patients about their symptoms and provide them with potential diagnoses or advice.
