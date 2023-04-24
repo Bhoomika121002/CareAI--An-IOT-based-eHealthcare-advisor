@@ -56,16 +56,34 @@ o   LM35
 -> Furthermore, the website will include health blogs and a chatbot that will provide a self-assessment of mild symptoms. 
 
 •  IOT BASED HEALTHCARE KIT
+
 Our healthcare website is proud to incorporate cutting-edge technology that helps users monitor their health. One of the tools we use is a sensory kit that contains NodeMCU, LM35, and MAX30100 sensors. These sensors are essential in measuring vital signs such as body temperature, heart rate, and oxygen saturation levels. 
 
 •  HEALTH BOT
+
 With the help of Dialog Flow, a like-life conversational AI to the websites, applications, messaging platforms, and contact centre with an intuitive, advanced virtual agent, this project helps the users interact with the website much more easily. The chatbot uses intents and entities for implementing a smooth conversation and then leading to a final diagnosis by an effective text-based diagnostic technique.
 
 ![unnamed](https://user-images.githubusercontent.com/78655015/233972692-92ed1f93-094f-434d-a723-ed0fbdbdc292.png)
+
 Fig.1 Interfacing NodeMCU with MAX30100 & LM35 (Heart Rate/Pulse rate Sensor & Temperature Sensor)
 
 ![LM35](https://user-images.githubusercontent.com/78655015/233972818-71405e7f-4745-4f61-860c-3af845e3160a.png)
+
 Fig.2 Methodology Chart
+
+## CARE-AI WEBSITE!
+[Uploading Screenshot (82).png…]()
+
+![Screenshot (83)](https://user-images.githubusercontent.com/78655015/233974386-e7379328-ce60-4394-bf2c-82bfef7628a3.png)
+
+![Screenshot (84)](https://user-images.githubusercontent.com/78655015/233974405-84b58110-2e84-452b-b649-c22d177039a4.png)
+
+![Screenshot (87)](https://user-images.githubusercontent.com/78655015/233974463-22501da5-06ec-481d-bd03-0fa5e565a931.png)
+
+![Screenshot (88)](https://user-images.githubusercontent.com/78655015/233974478-a6494029-4d89-4d51-8a81-16b7fa8957a0.png)
+
+![Screenshot (86)](https://user-images.githubusercontent.com/78655015/233974498-0974b5fe-ba92-4e55-9a6b-5f74bafe23aa.png)
+INTEGRATED ChatBot
 
 
 ## APPLICATION
@@ -92,4 +110,7 @@ Our technology collects real-time medical information about a patient and stores
 [3] P. Gupta, D. Agrawal, J. Chhabra and P. K. Dhir, "IoT-based smart healthcare kit," 2016 International Conference on Computational Techniques in Information and Communication Technologies (ICCTICT), New Delhi, India, 2016, pp. 237-242, doi: 10.1109/ICCTICT.2016.7514585.
 
 [4] M. U. Ahmed, M. Björkman, A. Čaušević H. Fotouhi, and M. Lindén, “An overview on the internet of things for Health Monitoring Systems,” SpringerLink, 01-Jan-1970. Available: https://link.springer.com/chapter/10.1007/978-3-319-47063-4_44.
+
+
+*This repository contains all the information related to the project.*
 
