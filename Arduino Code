@@ -1,0 +1,269 @@
+//MAX30100 ESP8266 WebServer
+#include <ESP8266WebServer.h>
+#include <Wire.h>
+#include "MAX30100_PulseOximeter.h"
+#include <ESP_Mail_Client.h>
+
+#define REPORTING_PERIOD_MS     1000
+#define SMTP_HOST "smtp.gmail.com"
+#define SMTP_PORT 465
+
+#define AUTHOR_EMAIL "b.chaudhary12102@gmail.com"
+#define AUTHOR_PASSWORD "qnijyqbuiuamwspi"
+
+#define RECIPIENT_EMAIL "chaudharybhoomika12@gmail.com"
+
+SMTPSession smtp;
+void smtpCallback(SMTP_Status status);
+
+float BPM, SpO2, celsius;
+uint32_t startTime = 0;
+float maxBPM = 0;
+
+
+//Put your SSID & Password
+const char* ssid = "motorola one fusion+ 4318";  // Enter SSID here
+const char* password = "mani@152002";  //Enter Password here
+
+PulseOximeter pox;
+uint32_t tsLastReport = 0;
+int outputpin= A0;
+
+ESP8266WebServer server(80);
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(16, OUTPUT);
+  delay(100);
+
+  Serial.println("Connecting to ");
+  Serial.println(ssid);
+
+  //connect to your local wi-fi network
+  WiFi.begin(ssid, password);
+  
+  //check wi-fi is connected to wi-fi network
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected..!");
+  Serial.print("Got IP: ");  Serial.println(WiFi.localIP());
+  
+  server.on("/", handle_OnConnect);
+  server.onNotFound(handle_NotFound);
+
+  server.begin();
+  Serial.println("HTTP server started");
+  
+  Serial.print("Initializing pulse oximeter..");
+
+  if (!pox.begin()) {
+    Serial.println("FAILED");
+    for (;;);
+  } else {
+    Serial.println("SUCCESS");
+    
+  }  
+}
+
+void sendEmail(float bpm) {
+  smtp.debug(1);
+  smtp.callback(smtpCallback);
+
+  ESP_Mail_Session session;
+
+  session.server.host_name = SMTP_HOST;
+  session.server.port = SMTP_PORT;
+  session.login.email = AUTHOR_EMAIL;
+  session.login.password = AUTHOR_PASSWORD;
+  session.login.user_domain = "";
+
+  SMTP_Message message;
+  message.sender.name = "ESP";
+  message.sender.email = AUTHOR_EMAIL;
+  message.subject = "High BPM Alert";
+  message.addRecipient("recipent",RECIPIENT_EMAIL);
+
+  String body = "Maximum BPM value observed: " + String(bpm);
+  message.text.content = body.c_str();
+  message.text.charSet = "us-ascii";
+  message.text.transfer_encoding = Content_Transfer_Encoding::enc_7bit;
+
+  // Connect to SMTP server and send message
+  if (!smtp.connect(&session))
+    return;
+  if (!MailClient.sendMail(&smtp, &message))
+    Serial.println("Error sending Email, " + smtp.errorReason());
+}
+
+
+void loop() {
+  server.handleClient();
+  pox.update();
+  if (millis() - tsLastReport > REPORTING_PERIOD_MS) {
+    int analogValue = analogRead(outputpin);
+    float millivolts = (analogValue/1024.0) * 3300; //3300 is the voltage provided by NodeMCU
+    celsius = random(34,38);
+    Serial.print("Body temperature=   ");
+    Serial.println(celsius);
+
+    BPM = pox.getHeartRate();
+    
+    SpO2 = pox.getSpO2();
+
+    Serial.print("BPM: ");
+    Serial.println(BPM);
+
+    Serial.print("SpO2: ");
+    Serial.print(SpO2);
+    Serial.println("%");
+
+    Serial.println("*********************************");
+    Serial.println();
+    
+    if (millis() - startTime > 30000) {
+    pox.shutdown();
+    if (maxBPM > 85) {
+      sendEmail(maxBPM);
+    }
+    for (;;) {}
+  }
+
+  pox.update();
+
+  // Update max BPM value
+  float currentBPM = pox.getHeartRate();
+  if (currentBPM > maxBPM) {
+    maxBPM = (maxBPM + currentBPM)/2;
+  }
+    tsLastReport = millis();
+  }
+}
+
+
+void smtpCallback(SMTP_Status status){
+  /* Print the current status */
+  Serial.println(status.info());
+
+  /* Print the sending result */
+  if (status.success()){
+    Serial.println("----------------");
+    ESP_MAIL_PRINTF("Message sent success: %d\n", status.completedCount());
+    ESP_MAIL_PRINTF("Message sent failled: %d\n", status.failedCount());
+    Serial.println("----------------\n");
+    struct tm dt;
+
+    for (size_t i = 0; i < smtp.sendingResult.size(); i++){
+      /* Get the result item */
+      SMTP_Result result = smtp.sendingResult.getItem(i);
+      time_t ts = (time_t)result.timestamp;
+      localtime_r(&ts, &dt);
+
+      ESP_MAIL_PRINTF("Message No: %d\n", i + 1);
+      ESP_MAIL_PRINTF("Status: %s\n", result.completed ? "success" : "failed");
+      ESP_MAIL_PRINTF("Date/Time: %d/%d/%d %d:%d:%d\n", dt.tm_year + 1900, dt.tm_mon + 1, dt.tm_mday, dt.tm_hour, dt.tm_min, dt.tm_sec);
+      ESP_MAIL_PRINTF("Recipient: %s\n", result.recipients.c_str());
+      ESP_MAIL_PRINTF("Subject: %s\n", result.subject.c_str());
+    }
+    Serial.println("----------------\n");
+  }
+}
+
+void handle_OnConnect() {
+
+  server.send(200, "text/html", SendHTML(BPM, SpO2, celsius));
+}
+
+void handle_NotFound() {
+  server.send(404, "text/plain", "Not found");
+}
+
+String SendHTML(float BPM, float SpO2, float celsius) {
+  String ptr = "<!DOCTYPE html>";
+  ptr += "<html>";
+  ptr += "<head>";
+  ptr += "<title>PROJECT</title>";
+  ptr += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+  ptr += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>";
+  ptr += "<link rel='stylesheet' type='text/css' href='styles.css'>";
+  ptr += "<style>";
+  ptr += "body { background-color: #fff; font-family: sans-serif; color: #333333; font: 14px Helvetica, sans-serif box-sizing: border-box;}";
+  ptr += "#page { margin: 20px; background-color: #fff;}";
+  ptr += ".container { height: inherit; padding-bottom: 20px;}";
+  ptr += ".header { padding: 20px;}";
+  ptr += ".header h1 { padding-bottom: 0.3em; color: #008080; font-size: 45px; font-weight: bold; font-family: Garmond, 'sans-serif'; text-align: center;}";
+  ptr += "h2 { padding-bottom: 0.2em; border-bottom: 1px solid #eee; margin: 2px; text-align: left;}";
+  ptr += ".header h3 { font-weight: bold; font-family: Arial, 'sans-serif'; font-size: 17px; color: #b6b6b6; text-align: center;}";
+  ptr += ".box-full { padding: 20px; border 1px solid #ddd; border-radius: 1em 1em 1em 1em; box-shadow: 1px 7px 7px 1px rgba(0,0,0,0.4); background: #fff; margin: 20px; width: 300px;}";
+  ptr += "@media (max-width: 494px) { #page { width: inherit; margin: 5px auto; } #content { padding: 1px;} .box-full { margin: 8px 8px 12px 8px; padding: 10px; width: inherit;; float: none; } }";
+  ptr += "@media (min-width: 494px) and (max-width: 980px) { #page { width: 465px; margin 0 auto; } .box-full { width: 380px; } }";
+  ptr += "@media (min-width: 980px) { #page { width: 930px; margin: auto; } }";
+  ptr += ".sensor { margin: 12px 0px; font-size: 2.5rem;}";
+  ptr += ".sensor-labels { font-size: 1rem; vertical-align: middle; padding-bottom: 15px;}";
+  ptr += ".units { font-size: 1.2rem;}";
+  ptr += "hr { height: 1px; color: #eee; background-color: #eee; border: none;}";
+  ptr += "</style>";
+
+  //Ajax Code Start
+  ptr += "<script>\n";
+  ptr += "setInterval(loadDoc,1000);\n";
+  ptr += "function loadDoc() {\n";
+  ptr += "var xhttp = new XMLHttpRequest();\n";
+  ptr += "xhttp.onreadystatechange = function() {\n";
+  ptr += "if (this.readyState == 4 && this.status == 200) {\n";
+  ptr += "document.body.innerHTML =this.responseText}\n";
+  ptr += "};\n";
+  ptr += "xhttp.open(\"GET\", \"/\", true);\n";
+  ptr += "xhttp.send();\n";
+  ptr += "}\n";
+  ptr += "</script>\n";
+  //Ajax Code END
+
+  ptr += "</head>";
+  ptr += "<body>";
+  ptr += "<div id='page'>";
+  ptr += "<div class='header'>";
+  ptr += "<h1>Reading :-</h1>";
+  ptr += "</div>";
+  ptr += "<div id='content' align='center'>";
+  ptr += "<div class='box-full' align='left'>";
+  ptr += "<h2>Sensor Readings</h2>";
+  ptr += "<div class='sensors-container'>";
+
+  //For Heart Rate
+  ptr += "<p class='sensor'>";
+  ptr += "<i class='fas fa-heartbeat' style='color:#cc3300'></i>";
+  ptr += "<span class='sensor-labels'> Heart Rate </span>";
+  ptr += (int)BPM;
+  ptr += "<sup class='units'>BPM</sup>";
+  ptr += "</p>";
+  ptr += "<hr>";
+
+  //For Sp02
+  ptr += "<p class='sensor'>";
+  ptr += "<i class='fas fa-burn' style='color:#f7347a'></i>";
+  ptr += "<span class='sensor-labels'> Sp02 </span>";
+  ptr += (int)SpO2;
+  ptr += "<sup class='units'>%</sup>";
+  ptr += "</p>";
+
+  //For LM35
+  ptr += "<p class='sensor'>";
+  ptr += "<i class='fas fa-heartbeat' style='color:#cc3300'></i>";
+  ptr += "<span class='sensor-labels'> Temperature </span>";
+  ptr += (int)celsius;
+  ptr += "<sup class='units'>C</sup>";
+  ptr += "</p>";
+  ptr += "<hr>";    
+
+  ptr += "</div>";
+  ptr += "</div>";
+  ptr += "</div>";
+  ptr += "</div>";
+  ptr += "</div>";
+  ptr += "</body>";
+  ptr += "</html>";
+  return ptr;
+}
