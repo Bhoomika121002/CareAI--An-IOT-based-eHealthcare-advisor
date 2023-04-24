@@ -63,10 +63,14 @@ Our healthcare website is proud to incorporate cutting-edge technology that help
 
 With the help of Dialog Flow, a like-life conversational AI to the websites, applications, messaging platforms, and contact centre with an intuitive, advanced virtual agent, this project helps the users interact with the website much more easily. The chatbot uses intents and entities for implementing a smooth conversation and then leading to a final diagnosis by an effective text-based diagnostic technique.
 
-
 <div align="center">
   
 ![unnamed](https://user-images.githubusercontent.com/78655015/233976306-1c07ac3b-41e8-4381-8595-4a5e3586bfc9.png)
+
+</div>
+
+<div align="center">
+  
 Fig.1 Interfacing NodeMCU with MAX30100 & LM35 (Heart Rate/Pulse rate Sensor & Temperature Sensor)
 
 </div>
