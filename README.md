@@ -14,8 +14,11 @@ Traditional healthcare systems have been time-consuming and difficult to navigat
 
 ## OBJECTTIVES
 • To monitor the basic health parameters of the patient and check if there is any unusual behavior or not.
+
 • To provide an IoT-based remote Health care kit and AI Chatbot which provides health advice to patients.
+
 • To generate alert emails of health status to help the patient stay focused on their unique health needs. 
+
 
 ## TECHNOLOGY STACK
 -> Version Control
