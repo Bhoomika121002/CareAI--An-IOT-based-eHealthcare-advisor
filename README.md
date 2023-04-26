@@ -115,7 +115,8 @@ Integrated ChatBot
 </div>
 
 <div align="center">
-![unnamed](https://user-images.githubusercontent.com/78655015/234537168-21eb43c5-7aef-4d48-b1a4-c283985ca3ed.png)
+![unnamed](https://user-images.githubusercontent.com/78655015/234538214-46620060-bdab-41eb-8ea3-c8fc925f6978.png)
+
 </div>
 
 <div align="center">
