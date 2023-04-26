@@ -114,7 +114,10 @@ Fig.2 Methodology Chart
 Integrated ChatBot
 </div>
 
+<div align="center">
 ![unnamed](https://user-images.githubusercontent.com/78655015/234537168-21eb43c5-7aef-4d48-b1a4-c283985ca3ed.png)
+</div>
+
 <div align="center">
 Final Output
 </div>
